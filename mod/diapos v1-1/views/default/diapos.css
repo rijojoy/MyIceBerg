@@ -1,0 +1,41 @@
+body {
+	background-color: #ffffff;
+}
+#gallery {
+	position: relative;
+	width: 100px;
+	height: 650px;
+}
+#thumbs {
+	width: 300px;
+	float: left;
+}
+#thumbs a {
+	display: block;
+	float: left;
+	margin: 0 0 5px 5px;
+	width: 50px;
+	height: 50px;
+}
+#thumbs a img {
+	width: 50px;
+	height: 50px;
+	border: 0;
+}
+#thumbs a:hover {
+	border-color: #ddd;
+}
+#thumbs a:hover img {	
+	position: absolute;	
+	width: 650px;	
+	height: auto;	
+	left: 400px;	
+	top: 0;	
+	border: 5px solid #222;
+	}
+	
+#bloc1 {
+background-color: rgb(255, 255, 102);
+color: black;
+font-size: 12px; 
+}

@@ -1,0 +1,12 @@
+c:\Projects\plupload\src\csharp\Plupload\bin\plupload.silverlight.dll
+c:\Projects\plupload\src\csharp\Plupload\bin\plupload.silverlight.pdb
+c:\Projects\plupload\src\csharp\Plupload\bin\AppManifest.xaml
+c:\Projects\plupload\src\csharp\Plupload\bin\plupload.silverlight.xap
+c:\Projects\plupload\src\csharp\Plupload\bin\Default.html
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\ResolveAssemblyReference.cache
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\App.g.cs
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\Page.g.cs
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\plupload.silverlight.g.resources
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\plupload.silverlight.dll
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\plupload.silverlight.pdb
+c:\Projects\plupload\src\csharp\Plupload\obj\Release\XapCacheFile.xml

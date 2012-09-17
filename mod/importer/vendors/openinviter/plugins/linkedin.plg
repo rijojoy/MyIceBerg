@@ -1,0 +1,66 @@
+<?php
+$_pluginInfo=array(
+	'name'=>'LinkedIn',
+	'version'=>'2.0.0',
+	'description'=>"Get the contacts from a LinkedIn account",
+	'base_version'=>'1.8.0',
+	'type'=>'email',
+	'check_url'=>'http://m.linkedin.com/session/new',
+	'requirement'=>'email',
+	'allowed_domains'=>false,
+	);
+class linkedin extends openinviter_base
+	{
+	private $login_ok=false;
+	public $showContacts=true;
+	public $internalError=false;
+	protected $timeout=30;
+  public $debug_array=array('initial_get'=>'login','login_post'=>'contacts','get_friends'=>'mailto',);
+
+	public function login($user,$pass)
+		{
+		$this->resetDebugger();
+		$this->service='linkedin';
+		$this->service_user=$user;
+		$this->service_password=$pass;
+		if (!$this->init()) return false;
+		$res=str_replace(PHP_EOL,"",$this->post("http://www.linkedin.com/uas/login-submit",array('session_key'=>$user,'session_password'=>$pass),true));
+    if(strpos($res,"Account Type")>0)
+		   return true;
+    else
+     {
+      $this->debugRequest();
+			$this->stopPlugin();
+			return false;
+
+     }
+		}
+
+  public function getMyContacts()
+		{
+		$res=$this->get("http://www.linkedin.com/connections2?displayFilteredConns=&fetchConnsFromDB=true",true);
+		$res=str_replace(PHP_EOL,"",$res);
+    preg_match_all("#<li id=\"(.+)\"#U",$res,$contacts);
+    $linkeds=array();
+    foreach($contacts[1] as $id)
+    {
+  	  $res=str_replace(PHP_EOL,"",$this->get("http://www.linkedin.com/connections2?displayConnDetail=&contactMemberID=$id",true));
+      preg_match("#<a href=\"mailto\:(.+)\"#U",$res,$eml);
+      $p1=strpos($res,"Econ\" >");
+      $fnm=substr($res,$p1+7,strpos($res,"<",$p1+7)-$p1-7);
+      if((!empty($eml[1]))&&(!empty($fnm))) $linkeds[$eml[1]]=trim($fnm);
+    }
+    return $linkeds;
+		}
+	public function logout()
+		{
+		if (!$this->checkSession()) return false;
+		$res=$this->get("https://www.linkedin.com/secure/login?session_full_logout=&trk=hb_signout",true);
+		$this->debugRequest();
+		$this->resetDebugger();
+		$this->stopPlugin();
+		return true;
+		}
+	}
+
+?>
